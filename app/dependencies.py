@@ -37,3 +37,7 @@ async def get_current_user(
         request.session.clear()
         raise NotAuthenticatedError
     return user
+
+
+DbDep = Annotated[AsyncSession, Depends(get_session)]
+UserDep = Annotated[User, Depends(get_current_user)]

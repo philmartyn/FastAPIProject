@@ -28,7 +28,7 @@ async def login_form(request: Request) -> Response:
     return templates.TemplateResponse(request, "login.html")
 
 
-@router.post("/login")
+@router.post("/login", include_in_schema=False)
 async def login(
     request: Request,
     db: Annotated[AsyncSession, Depends(get_session)],
@@ -52,7 +52,7 @@ async def register_form(request: Request) -> Response:
     return templates.TemplateResponse(request, "register.html")
 
 
-@router.post("/register")
+@router.post("/register", include_in_schema=False)
 async def register(
     request: Request,
     db: Annotated[AsyncSession, Depends(get_session)],
@@ -72,7 +72,7 @@ async def register(
     return RedirectResponse("/notes", status_code=303)
 
 
-@router.post("/logout")
+@router.post("/logout", include_in_schema=False)
 async def logout(request: Request) -> RedirectResponse:
     """Clear the session and redirect to /login."""
     security.log_out(request)

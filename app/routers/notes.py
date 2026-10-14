@@ -4,22 +4,16 @@ Everything except the main page returns an HTML *fragment* (a partial template)
 so HTMX can swap it into the DOM without a full page reload.
 """
 
-from typing import Annotated
-
-from fastapi import APIRouter, Depends, Form, Request
+from fastapi import APIRouter, Form, Request
 from fastapi.responses import HTMLResponse
-from sqlalchemy.ext.asyncio import AsyncSession
 
-from app import services
-from app.database import get_session
-from app.dependencies import get_current_user
-from app.models import User
+from app import dependencies, services
 from app.templating import templates
 
-UserDep = Annotated[User, Depends(get_current_user)]
-DbDep = Annotated[AsyncSession, Depends(get_session)]
+UserDep = dependencies.UserDep
+DbDep = dependencies.DbDep
 
-router = APIRouter(prefix="/notes", tags=["notes"])
+router = APIRouter(prefix="/notes")
 
 
 @router.get("", response_class=HTMLResponse, include_in_schema=False)

@@ -3,25 +3,14 @@
 Run locally with:
     uvicorn app.main:app --reload
 
-TODO (you) -- finish wiring the app together:
+Wiring, in order:
 
-  1. Session middleware (needed for `request.session`):
-
-         from starlette.middleware.sessions import SessionMiddleware
-         app.add_middleware(SessionMiddleware, secret_key=settings.secret_key)
-
-  2. Include the routers:
-
-         from app.routers import api, auth, notes, pages
-         app.include_router(pages.router)
-         app.include_router(auth.router)
-         app.include_router(notes.router)
-         app.include_router(api.router)
-
-  3. (Nicer than @app.on_event) use a lifespan handler for startup/shutdown.
-
-  4. (Optional) an exception handler that turns an "unauthenticated" error into
-     a redirect to /login for HTML requests and a JSON 401 for /api requests.
+  - `SessionMiddleware` signed with `settings.secret_key`, so `request.session`
+    works for the login cookie.
+  - The routers: pages, auth, notes (HTMX fragments), api (/api/v1 JSON).
+  - A `NotAuthenticatedError` handler that redirects HTML requests to /login and
+    returns a JSON 401 for /api requests.
+  - A `/healthz` liveness probe.
 """
 
 from fastapi import FastAPI, Request
