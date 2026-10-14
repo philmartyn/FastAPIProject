@@ -1,0 +1,24 @@
+{# One note card. Rendered on the page *and* returned by the create / update /
+   pin routes, so its id is the htmx swap target for the card's own actions. #}
+<article class="card note{% if note.is_pinned %} pinned{% endif %}" id="note-{{ note.id }}">
+  <h3 class="note-title">
+    {% if note.is_pinned %}<span title="Pinned">📌</span>{% endif %}
+    {{ note.title }}
+  </h3>
+  <p class="note-body">{{ note.body }}</p>
+  <div class="actions">
+    <button type="button"
+            hx-patch="/notes/{{ note.id }}/pin"
+            hx-target="#note-{{ note.id }}"
+            hx-swap="outerHTML">{% if note.is_pinned %}Unpin{% else %}Pin{% endif %}</button>
+    <button type="button"
+            hx-get="/notes/{{ note.id }}/edit"
+            hx-target="#note-{{ note.id }}"
+            hx-swap="outerHTML">Edit</button>
+    <button type="button"
+            hx-delete="/notes/{{ note.id }}"
+            hx-target="#note-{{ note.id }}"
+            hx-swap="outerHTML"
+            hx-confirm="Delete this note?">Delete</button>
+  </div>
+</article>

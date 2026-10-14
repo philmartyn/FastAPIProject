@@ -1,18 +1,31 @@
 {% extends "base.html" %}
 {% block title %}My notes · FastAPI Notes{% endblock %}
 
+{% block header %}
+  <form method="post" action="/logout">
+    <button type="submit">Log out</button>
+  </form>
+{% endblock %}
+
 {% block content %}
   <h2>My notes</h2>
 
-  {# TODO: a form to add a note.
-     Give it hx-post="/notes" and hx-target="#note-list" so htmx appends the
-     returned card fragment without reloading the page. #}
-  <form class="card" hx-post="/notes" hx-target="#note-list" hx-swap="afterbegin">
+  {# Post a new note and prepend the returned card into #note-list.
+     htmx 2's after-request hook clears the fields once it succeeds. #}
+  <form class="card"
+        hx-post="/notes"
+        hx-target="#note-list"
+        hx-swap="afterbegin"
+        hx-on::after-request="if (event.detail.successful) this.reset()">
     <input type="text" name="title" placeholder="Title" required>
     <textarea name="body" placeholder="Write something..."></textarea>
     <button type="submit">Add note</button>
   </form>
 
-  {# TODO: render the note cards here (or load them via hx-get="/notes/list"). #}
-  <section id="note-list"></section>
+  {# Server-rendered so the page works before htmx loads (progressive enhancement). #}
+  <section id="note-list">
+    {% for note in notes %}
+      {% include "notes/_note.html" %}
+    {% endfor %}
+  </section>
 {% endblock %}

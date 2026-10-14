@@ -1,0 +1,17 @@
+{# Inline edit form. It reuses the card's id so that a successful PUT (which
+   returns the card again) swaps back into exactly the same spot. #}
+<form id="note-{{ note.id }}"
+      class="card note"
+      hx-put="/notes/{{ note.id }}"
+      hx-target="#note-{{ note.id }}"
+      hx-swap="outerHTML">
+  <input type="text" name="title" value="{{ note.title }}" required>
+  <textarea name="body" placeholder="Write something...">{{ note.body }}</textarea>
+  <div class="actions">
+    <button type="submit">Save</button>
+    <button type="button"
+            hx-get="/notes/list"
+            hx-target="#note-list"
+            hx-swap="innerHTML">Cancel</button>
+  </div>
+</form>
