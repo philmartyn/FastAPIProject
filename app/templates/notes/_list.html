@@ -1,5 +1,5 @@
-{# Every note card for the current user. Returned by GET /notes/list so htmx can
-   restore the whole list -- and its pinned-first ordering -- in a single swap. #}
-{% for note in notes %}
-  {% include "notes/_note.html" %}
-{% endfor %}
+{#- Every note card for the current user. Returned by GET /notes/list so htmx can
+    restore the whole list -- and its pinned-first ordering -- in a single swap.
+    Written to emit no whitespace when there are no notes, so the swapped-in
+    #note-list matches the `:empty` empty-state style. -#}
+{% for note in notes %}{% include "notes/_note.html" %}{% endfor -%}

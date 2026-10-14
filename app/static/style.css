@@ -60,3 +60,53 @@ button {
   cursor: pointer;
   font: inherit;
 }
+
+/* --- Note list ---------------------------------------------------------- */
+
+/* Empty state: only matches when the list holds no cards at all. */
+#note-list:empty::after {
+  content: "No notes yet — add your first one above.";
+  display: block;
+  color: #9aa5b1;
+  font-size: 0.9rem;
+  padding: 0.75rem 0;
+}
+
+.note-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.note-body {
+  margin: 0 0 0.85rem;
+  color: #52606d;
+  white-space: pre-wrap; /* keep the author's own line breaks */
+}
+
+.note.pinned { border-left: 4px solid var(--accent); }
+
+/* Row of per-note actions (Pin / Edit / Delete). */
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions button {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+.actions button:hover { border-color: var(--accent); }
+
+/* Cards that contain a form (add + inline edit) need a little vertical rhythm. */
+.card input, .card textarea { margin: 0.25rem 0; }
+textarea { resize: vertical; min-height: 4rem; }
+
+/* Keep the header's logout button compact. */
+.site-header button { padding: 0.35rem 0.75rem; font-size: 0.85rem; }

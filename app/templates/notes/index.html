@@ -22,10 +22,8 @@
     <button type="submit">Add note</button>
   </form>
 
-  {# Server-rendered so the page works before htmx loads (progressive enhancement). #}
-  <section id="note-list">
-    {% for note in notes %}
-      {% include "notes/_note.html" %}
-    {% endfor %}
-  </section>
+  {# Server-rendered so the page works before htmx loads (progressive enhancement).
+     The loop is on one line so the section is truly empty when there are no notes,
+     which is what lets the `#note-list:empty` empty-state style apply. #}
+  <section id="note-list">{% for note in notes %}{% include "notes/_note.html" %}{% endfor %}</section>
 {% endblock %}
