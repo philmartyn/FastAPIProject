@@ -78,11 +78,11 @@ Work top to bottom; each phase ends with something you can actually verify.
 
 - [x] **1. Database layer** — fill in `database.py` and `models.py`.
   - Verify: `alembic init alembic` then `alembic revision --autogenerate -m "initial"` creates a migration with `users` and `notes` tables, and `alembic upgrade head` applies it.
-- [ ] **2. Auth** — `security.py`, `dependencies.py`, `routers/auth.py`; add `SessionMiddleware` in `main.py`.
+- [x] **2. Auth** — `security.py`, `dependencies.py`, `routers/auth.py`; add `SessionMiddleware` in `main.py`.
   - Verify: register → log in → a protected page loads; logging out sends you back.
 - [ ] **3. JSON API** — `schemas.py`, `services.py`, `routers/api.py`.
   - Verify: create/read notes from `/docs`; a second user can't see the first user's notes.
-- [ ] **4. HTMX UI** — flesh out `templates/` and `routers/notes.py`.
+- [x] **4. HTMX UI** — flesh out `templates/` and `routers/notes.py`.
   - Verify: add / edit / pin / delete notes with **no page reloads**.
 - [ ] **5. Tests** — `tests/conftest.py` + `test_auth.py`, `test_notes.py`, `test_api.py`.
   - Verify: `pytest` is green using SQLite (no Postgres needed).
