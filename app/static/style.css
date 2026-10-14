@@ -1,0 +1,60 @@
+/* Minimal styles so the app looks tidy. TODO (you): make it your own. */
+
+:root {
+  --bg: #f6f7f9;
+  --fg: #1f2933;
+  --card: #ffffff;
+  --accent: #3b82f6;
+  --border: #e4e7eb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+}
+
+.container { max-width: 720px; margin: 0 auto; padding: 1.5rem; }
+
+.site-header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-header h1 { font-size: 1.1rem; margin: 0; }
+.site-header a { text-decoration: none; color: inherit; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+label { display: block; margin: 0.5rem 0; font-size: 0.9rem; }
+input, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font: inherit;
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Sign up · FastAPI Notes{% endblock %}
+
+{% block content %}
+  <h2>Create an account</h2>
+
+  {# TODO: POST to /register with `email` and `password` fields. #}
+  <form method="post" action="/register" class="card">
+    <label>Email <input type="email" name="email" required></label>
+    <label>Password <input type="password" name="password" required></label>
+    <button type="submit">Sign up</button>
+  </form>
+
+  <p>Already registered? <a href="/login">Log in</a>.</p>
+{% endblock %}
