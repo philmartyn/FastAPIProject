@@ -3,8 +3,6 @@
 We use the `bcrypt` library directly (passlib is unmaintained and breaks with
 recent bcrypt releases).
 
-TODO (you):
-
   - hash_password(password: str) -> str
       bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
@@ -19,14 +17,23 @@ TODO (you):
 Docs: https://pypi.org/project/bcrypt/
 """
 
+import bcrypt
+from starlette.requests import Request
+
 
 def hash_password(password: str) -> str:
     """Return a bcrypt hash of `password`."""
-    # TODO
-    raise NotImplementedError
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
 
 def verify_password(password: str, hashed: str) -> bool:
     """Return True if `password` matches the stored `hashed` value."""
-    # TODO
-    raise NotImplementedError
+    return bcrypt.checkpw(password.encode(), hashed.encode())
+
+
+def log_in(request: Request, user_id: int) -> None:
+    request.session["user_id"] = user_id
+
+
+def log_out(request: Request) -> None:
+    request.session.clear()

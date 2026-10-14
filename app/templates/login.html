@@ -4,9 +4,8 @@
 {% block content %}
   <h2>Log in</h2>
 
-  {# TODO: render a flashed error message here if login failed. #}
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
 
-  {# TODO: POST to /login with `email` and `password` fields. #}
   <form method="post" action="/login" class="card">
     <label>Email <input type="email" name="email" required></label>
     <label>Password <input type="password" name="password" required></label>
